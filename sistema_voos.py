@@ -17,16 +17,15 @@ class Logavel(ABC):
 class IdentificavelMixin:
     """Gera um ID único; combine-o com outras classes."""
     def __init__(self):
-        id = uuid.uuid4()
+        self._id = uuid.uuid4()
     def get_id(self):
-        return id
+        return self._id
 
 
 class AuditavelMixin:
     """Fornece logs simples ao console."""
     def log_evento(self, evento: str):
-        # TODO: imprimir no formato  [LOG] <mensagem>
-        pass
+        print(f"[Log] {evento}")
 
 
 # -------------------------------------------------
