@@ -32,17 +32,16 @@ class AuditavelMixin:
 # 3) Classe base Pessoa                          🡇
 # -------------------------------------------------
 class Pessoa:
-    """Classe base para pessoas do sistema."""
     def __init__(self, nome: str, cpf: str):
-        # TODO: armazenar nome e cpf como atributos protegidos
-        pass
+        self._nome = nome
+        self._cpf = cpf
+    
     @property
     def nome(self):
-        # TODO: retornar o nome
-        pass
+        return self._nome
+    
     def __str__(self):
-        # TODO: "Maria (123.456.789-00)"
-        pass
+        return f"{self._nome} ({self._cpf})"
 
 
 # -------------------------------------------------
