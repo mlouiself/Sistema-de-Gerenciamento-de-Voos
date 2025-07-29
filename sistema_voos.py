@@ -74,12 +74,21 @@ class Passageiro(Pessoa):
 # -------------------------------------------------
 # 6) Funcionario (herança múltipla + mixins)     🡇
 # -------------------------------------------------
-# TODO: Implementar a classe Funcionario
-# - Herda de Pessoa, IdentificavelMixin e Logavel (pode usar AuditavelMixin)
-# - Atributos: cargo, matricula
-# - Métodos:
-#   • exibir_dados() → imprime nome, cargo, matrícula e ID
-#   • logar_entrada() → registra no log
+class Funcionario(Pessoa, IdentificavelMixin, AuditavelMixin):
+    def __init__(self, nome: str, cpf: str, cargo: str, matricula: str):
+        Pessoa.__init__(self, nome, cpf)
+        IdentificavelMixin.__init__(self)
+        self._cargo = cargo
+        self._matricula = matricula
+    
+    def exibir_dados(self):
+        print(f"Funcionário: {self.nome}")
+        print(f"  Cargo: {self._cargo}")
+        print(f"  Matrícula: {self._matricula}")
+        print(f"  ID: {self.get_id()}")
+    
+    def logar_entrada(self):
+        self.log_evento(f"Funcionário {self.nome} ({self._cargo}) fez login.")
 
 
 # -------------------------------------------------
