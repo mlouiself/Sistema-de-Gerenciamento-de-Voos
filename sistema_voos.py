@@ -59,16 +59,23 @@ class Bagagem:
 # 5) Passageiro                                  🡇
 # -------------------------------------------------
 class Passageiro(Pessoa):
-    """Herda de Pessoa e possui bagagens."""
     def __init__(self, nome: str, cpf: str):
-        # TODO: chamar super().__init__ e criar lista vazia de bagagens
-        pass
+        super().__init__(nome, cpf)
+        self._bagagens = []
+    
     def adicionar_bagagem(self, bagagem: Bagagem):
-        # TODO: adicionar bagagem à lista
-        pass
+        if bagagem in self._bagagens:
+            print("Esta bagagem já foi adicionada!")
+        else:
+            self._bagagens.append(bagagem)
+    
     def listar_bagagens(self):
-        # TODO: imprimir as bagagens
-        pass
+        if len(self._bagagens) == 0:
+            print(f"{self.nome} não possui bagagens.")
+        else:
+            print(f"Bagagens de {self.nome}:")
+            for bagagem in self._bagagens:
+                print(bagagem)
 
 
 # -------------------------------------------------
