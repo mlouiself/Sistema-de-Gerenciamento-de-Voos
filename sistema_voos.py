@@ -104,11 +104,11 @@ class Funcionario(Pessoa, IdentificavelMixin, AuditavelMixin):
 class MiniAeronave:
     """Objeto da composição dentro de Voo."""
     def __init__(self, modelo: str, capacidade: int):
-        # TODO: armazenar modelo e capacidade
-        pass
+        self.modelo = modelo
+        self.capacidade = capacidade
+        
     def resumo_voo(self):
-        # TODO: retornar string com modelo e capacidade
-        pass
+        return f'Modelo: {self.modelo}; Capacidade: {self.capacidade}'
 
 
 # -------------------------------------------------
@@ -170,6 +170,8 @@ class CompanhiaAerea:
 # 11) Bloco de teste                             🡇
 # -------------------------------------------------
 if __name__ == "__main__":
+    f = Funcionario('m', '1', 'estagiaria', '2024')
+    f.logar_entrada()
     """
     TODO:
       • Criar 2 companhias, 2 voos cada, passageiros, funcionários e auditor.
