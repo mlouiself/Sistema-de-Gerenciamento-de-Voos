@@ -60,27 +60,76 @@ class Bagagem:
 # -------------------------------------------------
 class Passageiro(Pessoa):
     def __init__(self, nome: str, cpf: str):
+<<<<<<< HEAD
+        super().__init__(nome, cpf) 
+        self._bagagem = []
+    
+    
+=======
         super().__init__(nome, cpf)
         self._bagagens = []
     
+>>>>>>> 77d2e55a8e28aac27364fb305502eed338ceb046
     def adicionar_bagagem(self, bagagem: Bagagem):
+<<<<<<< HEAD
+        if bagagem in self._bagagem:
+            print(f"{self._nome} já colocou está mala!")
+        else:
+            self._bagagem.append(bagagem)
+            print("bagagem adicionada")
+            
+            
+=======
         if bagagem in self._bagagens:
             print("Esta bagagem já foi adicionada!")
         else:
             self._bagagens.append(bagagem)
     
+>>>>>>> 77d2e55a8e28aac27364fb305502eed338ceb046
     def listar_bagagens(self):
+<<<<<<< HEAD
+        if len(self._bagagem) == 0:
+            print("Lista de bagagens vazia")
+        
+        else:
+            for bagagens in self._bagagem:
+                print(bagagens)
+=======
         if len(self._bagagens) == 0:
             print(f"{self.nome} não possui bagagens.")
         else:
             print(f"Bagagens de {self.nome}:")
             for bagagem in self._bagagens:
                 print(bagagem)
+>>>>>>> 77d2e55a8e28aac27364fb305502eed338ceb046
 
 
 # -------------------------------------------------
 # 6) Funcionario (herança múltipla + mixins)     🡇
 # -------------------------------------------------
+<<<<<<< HEAD
+class Funcionario(Pessoa, IdentificavelMixin, AuditavelMixin, Logavel):
+    def __init__(self,nome, cpf, cargo, matricula):
+        Pessoa.__init__(self,nome,cpf)
+        IdentificavelMixin.__init__(self)
+        self._cargo = cargo
+        self._matricula = matricula
+        
+    
+    def exibir_dados(self):
+        print(f"{self._nome} é {self._cargo}. Matricula: {self._matricula} | ID: {self.get_id}")
+                
+    def logar_entrada(self):
+        pass
+
+
+# TODO: Implementar a classe Funcionario
+# - Herda de Pessoa, IdentificavelMixin e Logavel (pode usar AuditavelMixin)
+# - Atributos: cargo, matricula
+# - Métodos:
+#   • exibir_dados() → imprime nome, cargo, matrícula e ID
+#   • logar_entrada() → registra no log
+=======
 class Funcionario(Pessoa, IdentificavelMixin, AuditavelMixin):
     def __init__(self, nome: str, cpf: str, cargo: str, matricula: str):
         Pessoa.__init__(self, nome, cpf)
@@ -96,6 +145,7 @@ class Funcionario(Pessoa, IdentificavelMixin, AuditavelMixin):
     
     def logar_entrada(self):
         self.log_evento(f"Funcionário {self.nome} ({self._cargo}) fez login.")
+>>>>>>> 77d2e55a8e28aac27364fb305502eed338ceb046
 
 
 # -------------------------------------------------
@@ -170,12 +220,19 @@ class CompanhiaAerea:
 # 11) Bloco de teste                             🡇
 # -------------------------------------------------
 if __name__ == "__main__":
+
+    funciona = Funcionario()
+    funciona.exibir_dados()
+"""
+=======
     f = Funcionario('m', '1', 'estagiaria', '2024')
     f.logar_entrada()
+    
+
+
     """
-    TODO:
+    
+    """TODO:
       • Criar 2 companhias, 2 voos cada, passageiros, funcionários e auditor.
       • Adicionar bagagens, listar passageiros, auditar voos.
-      • Mostrar saídas no console para validar implementações.
-    """
-    pass
+      • Mostrar saídas no console para validar implementações."""
