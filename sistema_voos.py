@@ -27,6 +27,7 @@ class AuditavelMixin:
     def log_evento(self, evento: str):
         print(f"[Log] {evento}")
 
+
 # -------------------------------------------------
 # 3) Classe base Pessoa                          🡇
 # -------------------------------------------------
@@ -41,6 +42,8 @@ class Pessoa:
     
     def __str__(self):
         return f"{self._nome} ({self._cpf})"
+    
+    
 # -------------------------------------------------
 # 4) Bagagem — classe simples                    🡇
 # -------------------------------------------------
@@ -50,6 +53,8 @@ class Bagagem:
         self.peso = peso  # kg
     def __str__(self):
         return f"{self.descricao} – {self.peso} kg"
+    
+    
 # -------------------------------------------------
 # 5) Passageiro                                  🡇
 # -------------------------------------------------
@@ -65,8 +70,6 @@ class Passageiro(Pessoa):
             print(f"{self._nome} já colocou está mala!")
         else:
             self._bagagem.append(bagagem)
-            
-            
             
     def listar_bagagens(self):
         if len(self._bagagem) == 0:
@@ -87,17 +90,14 @@ class Funcionario(Pessoa, IdentificavelMixin, AuditavelMixin, Logavel):
         self._cargo = cargo
         self._matricula = matricula
 
-     
-    
     def exibir_dados(self):
         print(f"{self._nome} é {self._cargo}. Matricula: {self._matricula} | ID: {self.get_id()}")
         
     def logar_entrada(self):
         self.log_evento(f"Funcionario(a) {self._nome}({self._cargo}) fez login.")
         
-    
 
- # -------------------------------------------------
+# -------------------------------------------------
 # 7) MiniAeronave                                🡇
 # -------------------------------------------------
 class MiniAeronave:
@@ -106,11 +106,13 @@ class MiniAeronave:
         self.modelo = modelo
         self.capacidade = capacidade
         
-                
     def resumo_voo(self):
         return f"Aeronave: {self.modelo} – Capacidade: {self.capacidade}"
 
 
+# -------------------------------------------------
+# 8) Voo (composição com MiniAeronave)           🡇
+# -------------------------------------------------
 class Voo:
     def __init__(self, numero_voo= str, origem = str, destino = str, aeronave = MiniAeronave):
         self.numero = numero_voo
@@ -168,18 +170,15 @@ class CompanhiaAerea:
         else:
             print("Não aceitamos nomes com menos de 3 caracteres")
     
-    
     @property
     def nome(self):
         return self._nome
-    
     
     @nome.setter
     def nome(self, novo_nome: str):
         if len(novo_nome) >= 3:
             self._nome = novo_nome
             return self._nome
-    
     
     def adicionar_voo(self, voo):
         if voo in self.voos:
@@ -188,7 +187,6 @@ class CompanhiaAerea:
             self.voos.append(voo)
             print("Voo adicionado")
     
-    
     def buscar_voo(self, numero: str):
         for procurar in self.voos:
             if numero == procurar.numero:
@@ -196,7 +194,6 @@ class CompanhiaAerea:
                 
         else:
             print(f"Não encontramos o voo: {numero}")
-    
     
     def listar_voos(self):
         print({self.nome})
@@ -210,12 +207,10 @@ class CompanhiaAerea:
 class Auditor(IdentificavelMixin, Logavel):
     def __init__(self, nome):
         self.nome = nome
-        
     
     def logar_entrada(self):
         print(f"O auditor:{self.nome} acabou de entrar.")
-    
-    
+
     def auditar_voo(self,voo = Voo):
         if len(voo.self._passageiros) <= voo.self.capacidade:
             print("A capacidade maxima da aeronave não foi excedida.")
@@ -223,12 +218,10 @@ class Auditor(IdentificavelMixin, Logavel):
             print("Tripulação necessária para voo")
         else:
             print("Não há tripulação na aeronave.") 
-            
-    
+        
     def __str__(self):
         print(f"Auditor ({self.nome} - id({self.get_id()})")
     
-
 
 # -------------------------------------------------
 # 11) Bloco de teste                             🡇
