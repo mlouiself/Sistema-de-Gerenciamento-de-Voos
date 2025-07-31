@@ -115,19 +115,19 @@ class MiniAeronave:
 # -------------------------------------------------
 class Voo:
     def __init__(self, numero_voo= str, origem = str, destino = str, aeronave = MiniAeronave):
-        self.numero = numero_voo
+        self.numero_voo = numero_voo
         self.origem = origem
         self.destino = destino
         self._passageiros = []
         self._tripulacao = []
         self.aeronave = aeronave
     
-    def adcionar_passageiro(self, passageiro : Passageiro):
+    def adicionar_passageiro(self, passageiro : Passageiro):
         if passageiro in self._passageiros:
             print(f"O passageiro {passageiro} já esta abordo.")
 
         else:
-            if self.aeronave.capacidade <= (len(self._passageiros) + len(self._tripulacao)):
+            if self.aeronave.capacidade <= len(self._passageiros):
                 print("Quantidade de passageiros maxima alcançada")        
         
             else:
@@ -139,7 +139,7 @@ class Voo:
             print(f"O tripulante {tripulante} já esta abordo.")
                 
         else:
-            if self.aeronave.capacidade <= (len(self._passageiros) + len(self._tripulacao)):
+            if len(self._tripulacao) >= 5:
                     print("Capacidade máxima de tripulates!")
             else:
                     self._tripulacao.append(tripulante)
@@ -147,15 +147,15 @@ class Voo:
 
 
     def listar_passageiros(self):
-        print(f"Passageiros do {self.numero}")
+        print(f"Passageiros do {self.numero_voo}")
         for listando in self._passageiros:
-            print(f"{listando.nome} - {listando._cpf}")
+            print(f"{listando._nome} - {listando._cpf}")
                 
         
     def listar_tripulantes(self):
-        print(f"Tripulação do voo {self.numero}")
+        print(f"Tripulação do voo {self.numero_voo}")
         for listando in self._tripulacao:
-            print(f"{listando.nome} - {listando._cpf} - {listando._matricula} - {listando._cargo}")
+            print(f"{listando._nome} - {listando._cpf} - {listando._matricula} - {listando._cargo}")
 
 
 # -------------------------------------------------
@@ -168,31 +168,39 @@ class CompanhiaAerea:
             raise ValueError("O nome da companhia deve ter pelo menos 3 letras.")
         self._nome = nome
         self._voos = []
+
     @property
     def nome(self):
         return self._nome
+    
     @nome.setter
     def nome(self, novo_nome: str):
         if len(novo_nome) < 3:
             raise ValueError("O nome da companhia deve ter pelo menos 3 letras.")
         self._nome = novo_nome
+
     def adicionar_voo(self, voo):
-        self._voos.append(voo)
-        print(f"Voo {voo.numero_voo} adicionado à {self._nome}")
+        if voo in self._voos:
+            print(f'O voo {voo.numero_voo} já foi adicionado.')
+        else:
+            self._voos.append(voo)
+            print(f"Voo {voo.numero_voo} adicionado à {self._nome}")
+
     def buscar_voo(self, numero: str):
         for voo in self._voos:
             if voo.numero_voo == numero:
                 return voo
         return None
+    
     def listar_voos(self):
         print(f"Voos da {self._nome}:")
-        if  len(self._voos) == 0:
+        if len(self._voos) == 0:
             print("Nenhum voo cadastrado.")
         else:
             for voo in self._voos:
                 print(f"{voo.numero_voo}: {voo.origem} → {voo.destino}")
                 print(f"{voo.aeronave.resumo_voo()}")
-                print(f"Passageiros: {len(voo.passageiros)}/{voo.aeronave.capacidade}")
+                print(f"Passageiros: {len(voo._passageiros)}/{voo.aeronave.capacidade}")
 
 
 # -------------------------------------------------
@@ -203,7 +211,7 @@ class Auditor(IdentificavelMixin, Logavel):
         self.nome = nome
     
     def logar_entrada(self):
-        print(f"O auditor:{self.nome} acabou de entrar.")
+        print(f"O auditor {self.nome} acabou de entrar.")
 
     def auditar_voo(self,voo = Voo):
         if len(voo.self._passageiros) <= voo.self.capacidade:
@@ -214,7 +222,7 @@ class Auditor(IdentificavelMixin, Logavel):
             print("Não há tripulação na aeronave.") 
         
     def __str__(self):
-        print(f"Auditor ({self.nome} - id({self.get_id()})")
+        print(f"Auditor {self.nome} - (ID: {self.get_id()})")
     
 
 # -------------------------------------------------
@@ -241,31 +249,15 @@ if __name__ == "__main__":
     voo3 = Voo("22", "Pi", "Rn", aircraft)
 
     #VOO1
-    voo1.adcionar_passageiro(passageiro1)
-    voo1.adcionar_passageiro(passageiro2) 
-    voo1.adcionar_passageiro(passageiro3)
-    voo1.adcionar_passageiro(passageiro4)
-    voo3.adcicionar_tripulantes(func)
+    voo1.adicionar_passageiro(passageiro1)
+    voo1.adicionar_passageiro(passageiro2) 
+    voo1.adicionar_passageiro(passageiro3)
+    voo1.adicionar_passageiro(passageiro4)
     voo1.listar_passageiros()
     voo1.listar_tripulantes()
     
     #VOO2
-    voo2.adcionar_passageiro(passageiro1)
-    voo2.adcionar_passageiro(passageiro2) 
-    voo2.adcionar_passageiro(passageiro3)
-    voo2.adcionar_passageiro(passageiro4)
-    voo2.adcicionar_tripulantes(func)
-    voo2.listar_passageiros()
-    voo2.listar_tripulantes()
-
-    # voo3
-    voo3.adcionar_passageiro(passageiro1)
-    voo3.adcionar_passageiro(passageiro2) 
-    voo3.adcionar_passageiro(passageiro3)
-    voo3.adcionar_passageiro(passageiro4)
-    voo3.adcicionar_tripulantes(func)
-    voo3.listar_passageiros()
-    voo3.listar_tripulantes()
+   
         
         
         
@@ -273,6 +265,9 @@ if __name__ == "__main__":
     compa = CompanhiaAerea("guarulhos")
     compa.adicionar_voo(voo1)
     compa.listar_voos()
+    
+    auditor = Auditor("thiago")
+    auditor.auditar_voo(voo1)
     
     """    
     TODO:
