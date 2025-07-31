@@ -164,41 +164,35 @@ class Voo:
 class CompanhiaAerea:
     """Agrupa seus voos (has-a)."""
     def __init__(self, nome: str):
-        if len(nome) >= 3:
-            self._nome = nome
-            self.voos = []
-        else:
-            print("Não aceitamos nomes com menos de 3 caracteres")
-    
+        if len(nome) < 3:
+            raise ValueError("O nome da companhia deve ter pelo menos 3 letras.")
+        self._nome = nome
+        self._voos = []
     @property
     def nome(self):
         return self._nome
-    
     @nome.setter
     def nome(self, novo_nome: str):
-        if len(novo_nome) >= 3:
-            self._nome = novo_nome
-            return self._nome
-    
+        if len(novo_nome) < 3:
+            raise ValueError("O nome da companhia deve ter pelo menos 3 letras.")
+        self._nome = novo_nome
     def adicionar_voo(self, voo):
-        if voo in self.voos:
-            print("Este voo ja entrou na nossa compainha.")
-        else:
-            self.voos.append(voo)
-            print("Voo adicionado")
-    
+        self._voos.append(voo)
+        print(f"Voo {voo.numero_voo} adicionado à {self._nome}")
     def buscar_voo(self, numero: str):
-        for procurar in self.voos:
-            if numero == procurar.numero:
-                print(f"Voo {procurar.numero} achado!")
-                
-        else:
-            print(f"Não encontramos o voo: {numero}")
-    
+        for voo in self._voos:
+            if voo.numero_voo == numero:
+                return voo
+        return None
     def listar_voos(self):
-        print({self.nome})
-        for listar in self.voos:
-            print(f"{listar.numero} - {listar.origem} - {listar.destino} - {listar.aeronave}")
+        print(f"Voos da {self._nome}:")
+        if  len(self._voos) == 0:
+            print("Nenhum voo cadastrado.")
+        else:
+            for voo in self._voos:
+                print(f"{voo.numero_voo}: {voo.origem} → {voo.destino}")
+                print(f"{voo.aeronave.resumo_voo()}")
+                print(f"Passageiros: {len(voo.passageiros)}/{voo.aeronave.capacidade}")
 
 
 # -------------------------------------------------
