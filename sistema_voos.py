@@ -67,13 +67,13 @@ class Passageiro(Pessoa):
     
     def adicionar_bagagem(self, bagagem: Bagagem):
         if bagagem in self._bagagem:
-            print(f"{self._nome} já colocou está mala!")
+            print(f"{self._nome} já colocou esta mala!")
         else:
             self._bagagem.append(bagagem)
             
     def listar_bagagens(self):
         if len(self._bagagem) == 0:
-            print("Lista de bagagens vazia")
+            print("Lista de bagagens vazia.")
         
         else:
             for bagagens in self._bagagem:
@@ -91,10 +91,10 @@ class Funcionario(Pessoa, IdentificavelMixin, AuditavelMixin, Logavel):
         self._matricula = matricula
 
     def exibir_dados(self):
-        print(f"{self._nome} é {self._cargo}. Matricula: {self._matricula} | ID: {self.get_id()}")
+        print(f"O funcionário {self._nome} é {self._cargo}. Matrícula: {self._matricula} | ID: {self.get_id()}")
         
     def logar_entrada(self):
-        self.log_evento(f"Funcionario(a) {self._nome}({self._cargo}) fez login.")
+        self.log_evento(f"Funcionário(a) {self._nome}({self._cargo}) fez login.")
         
 
 # -------------------------------------------------
@@ -124,36 +124,36 @@ class Voo:
     
     def adicionar_passageiro(self, passageiro : Passageiro):
         if passageiro in self._passageiros:
-            print(f"O passageiro {passageiro} já esta abordo.")
+            print(f"O passageiro {passageiro} já está abordo.")
 
         else:
             if self.aeronave.capacidade <= len(self._passageiros):
-                print("Quantidade de passageiros maxima alcançada")        
+                print("Quantidade de passageiros máxima alcançada.")        
         
             else:
                 self._passageiros.append(passageiro)
-                print("Passageiro adicionado")
+                print("Passageiro adicionado.")
         
     def adcicionar_tripulantes(self, tripulante):
         if tripulante in self._tripulacao:
-            print(f"O tripulante {tripulante} já esta abordo.")
+            print(f"O tripulante {tripulante} já está abordo.")
                 
         else:
             if len(self._tripulacao) >= 5:
                     print("Capacidade máxima de tripulates!")
             else:
                     self._tripulacao.append(tripulante)
-                    print("Tripulante adicionado")
+                    print("Tripulante adicionado.")
 
 
     def listar_passageiros(self):
-        print(f"Passageiros do {self.numero_voo}")
+        print(f"Passageiros do {self.numero_voo}:")
         for listando in self._passageiros:
             print(f"{listando._nome} - {listando._cpf}")
                 
         
     def listar_tripulantes(self):
-        print(f"Tripulação do voo {self.numero_voo}")
+        print(f"Tripulação do voo {self.numero_voo}:")
         for listando in self._tripulacao:
             print(f"{listando._nome} - {listando._cpf} - {listando._matricula} - {listando._cargo}")
 
@@ -215,9 +215,9 @@ class Auditor(IdentificavelMixin, Logavel):
 
     def auditar_voo(self,voo = Voo):
         if len(voo.self._passageiros) <= voo.self.capacidade:
-            print("A capacidade maxima da aeronave não foi excedida.")
+            print("A capacidade máxima da aeronave não foi excedida.")
         elif len(voo.self._tripulacao) >= 1:
-            print("Tripulação necessária para voo")
+            print("Tripulação necessária para voo.")
         else:
             print("Não há tripulação na aeronave.") 
         
