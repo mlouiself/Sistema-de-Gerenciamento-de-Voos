@@ -229,46 +229,40 @@ class Auditor(IdentificavelMixin, Logavel):
 # 11) Bloco de teste                             🡇
 # -------------------------------------------------
 if __name__ == "__main__":
+    print("🛫 SISTEMA DE GERENCIAMENTO DE COMPANHIAS AÉREAS 🛫")
+    print("=" * 60)
+    # Companhias
+    azul = CompanhiaAerea("Azul")
+    gol = CompanhiaAerea("GOL")
     
+    # Aeronaves
+    aeronave1 = MiniAeronave("Bravo 700", 2)
+    aeronave2 = MiniAeronave("Cessna 172", 4)
     
+    # Voos
+    voo1 = Voo("AZ001", "São Paulo", "Rio de Janeiro", aeronave1)
+    voo2 = Voo("AZ002", "Brasília", "Salvador", aeronave2)
+    voo3 = Voo("GOL123", "Recife", "Fortaleza", aeronave1)
+    voo4 = Voo("GOL456", "Porto Alegre", "Manaus", aeronave2)
     
-    passageiro1 = Passageiro("Thiago", "20241094010061" )
-    passageiro2 = Passageiro("Vitória", "20241094010062" )
-    passageiro3 = Passageiro("Marina", "20241094010063" )
-    passageiro4 = Passageiro("Robson", "20241094010064" )
-    func = Funcionario("Demetrios", "20241094010065", "engenheiro", "1306767733" )
-
+    azul.adicionar_voo(voo1)
+    azul.adicionar_voo(voo2)
+    gol.adicionar_voo(voo3)
+    gol.adicionar_voo(voo4)
     
-    miniaeronave = MiniAeronave("Airbus380", 5)
-    aviao = MiniAeronave("Airbus320", 9)
-    aircraft = MiniAeronave("Airbus310", 2)     
+    # Passageiros
+    p1 = Passageiro("Vitória Silva", "123.456.789-01")
+    p2 = Passageiro("Marina Santos", "987.654.321-02")
+    p3 = Passageiro("Thiago Costa", "456.789.123-03")
     
+    # Bagagens
+    bagagem1 = Bagagem("Mala de viagem", 23.5)
+    bagagem2 = Bagagem("Mochila", 8.2)
+    bagagem3 = Bagagem("Mala pequena", 15.0)
     
-    voo1 = Voo("33", "Am", "Rn", miniaeronave)
-    voo2 = Voo("22", "Frt", "Rn", aviao)
-    voo3 = Voo("22", "Pi", "Rn", aircraft)
-
-    #VOO1
-    voo1.adicionar_passageiro(passageiro1)
-    voo1.adicionar_passageiro(passageiro2) 
-    voo1.adicionar_passageiro(passageiro3)
-    voo1.adicionar_passageiro(passageiro4)
-    voo1.listar_passageiros()
-    voo1.listar_tripulantes()
-    
-    #VOO2
-   
-        
-        
-        
-        
-    compa = CompanhiaAerea("guarulhos")
-    compa.adicionar_voo(voo1)
-    compa.listar_voos()
-    
-    auditor = Auditor("thiago")
-    auditor.auditar_voo(voo1)
-    
+    p1.adicionar_bagagem(bagagem1)
+    p1.adicionar_bagagem(bagagem2)
+    p2.adicionar_bagagem(bagagem3)
     """    
     TODO:
     • Criar 2 companhias, 2 voos cada, passageiros, funcionários e auditor.
