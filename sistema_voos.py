@@ -134,7 +134,7 @@ class Voo:
                 self._passageiros.append(passageiro)
                 print("Passageiro adicionado.")
         
-    def adcicionar_tripulantes(self, tripulante):
+    def adicicionar_tripulantes(self, tripulante):
         if tripulante in self._tripulacao:
             print(f"O tripulante {tripulante} já está abordo.")
                 
@@ -214,9 +214,9 @@ class Auditor(IdentificavelMixin, Logavel):
         print(f"O auditor {self.nome} acabou de entrar.")
 
     def auditar_voo(self,voo = Voo):
-        if len(voo.self._passageiros) <= voo.self.capacidade:
+        if len(voo._passageiros) <= voo.aeronave.capacidade:
             print("A capacidade máxima da aeronave não foi excedida.")
-        elif len(voo.self._tripulacao) >= 1:
+        elif len(voo._tripulacao) >= 1:
             print("Tripulação necessária para voo.")
         else:
             print("Não há tripulação na aeronave.") 
@@ -251,9 +251,9 @@ if __name__ == "__main__":
     gol.adicionar_voo(voo4)
     
     # Passageiros
-    p1 = Passageiro("Vitória Cristina", "123.456.789-01")
-    p2 = Passageiro("Marina Louise", "987.654.321-02")
-    p3 = Passageiro("Thiago Maycon", "456.789.123-03")
+    p1 = Passageiro("Vitória", "123.456.789-01")
+    p2 = Passageiro("Marina", "987.654.321-02")
+    p3 = Passageiro("Thiago", "456.789.123-03")
     
     # Bagagens
     bagagem1 = Bagagem("Mala de viagem", 23.5)
@@ -263,6 +263,48 @@ if __name__ == "__main__":
     p1.adicionar_bagagem(bagagem1)
     p1.adicionar_bagagem(bagagem2)
     p2.adicionar_bagagem(bagagem3)
+
+    # Criando funcionários
+    piloto1 = Funcionario("Maycon", "111.222.333-44", "Piloto", "P001")
+    comissaria1 = Funcionario("Cristina", "999.888.777-66", "Comissária", "C001")
+    pilota2 = Funcionario("Louise", "222.333.444-55", "Piloto", "P002")
+    
+    # Adicionando aos voos
+    voo1.adicionar_passageiro(p1)
+    voo1.adicionar_passageiro(p2)
+    voo1.adicicionar_tripulantes(piloto1)
+
+    voo2.adicionar_passageiro(p3)
+    voo2.adicicionar_tripulantes(pilota2)
+    voo2.adicicionar_tripulantes(comissaria1)
+
+    # Criando auditor
+    auditor = Auditor("Demetrios")
+
+    # Teste
+    print("LISTAGEM DE VOOS")
+    azul.listar_voos()
+    gol.listar_voos()
+    
+    print("\nBAGAGENS DA MARINA")
+    p2.listar_bagagens()
+    
+    print("\nPASSAGEIROS DO VOO AZ001")
+    voo1.listar_passageiros()
+    
+    print("\nTRIPULAÇÃO DO VOO AZ002")
+    voo2.listar_tripulantes()
+    
+    print("\nDADOS DO FUNCIONÁRIO")
+    piloto1.exibir_dados()
+    
+    print("\nLOGS DE ENTRADA")
+    piloto1.logar_entrada()
+    auditor.logar_entrada()
+    
+    print("\nAUDITORIA")
+    auditor.auditar_voo(voo1)
+    auditor.auditar_voo(voo4)
     """    
     TODO:
     • Criar 2 companhias, 2 voos cada, passageiros, funcionários e auditor.
