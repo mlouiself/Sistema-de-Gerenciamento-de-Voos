@@ -251,9 +251,9 @@ if __name__ == "__main__":
     gol.adicionar_voo(voo4)
     
     # Passageiros
-    p1 = Passageiro("Vitória Silva", "123.456.789-01")
-    p2 = Passageiro("Marina Santos", "987.654.321-02")
-    p3 = Passageiro("Thiago Costa", "456.789.123-03")
+    p1 = Passageiro("Vitória Cristina", "123.456.789-01")
+    p2 = Passageiro("Marina Louise", "987.654.321-02")
+    p3 = Passageiro("Thiago Maycon", "456.789.123-03")
     
     # Bagagens
     bagagem1 = Bagagem("Mala de viagem", 23.5)
