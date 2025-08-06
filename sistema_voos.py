@@ -217,11 +217,13 @@ class Auditor(IdentificavelMixin, Logavel):
     def auditar_voo(self, voo: Voo):
         if len(voo._passageiros) <= voo.aeronave.capacidade:
             print("A capacidade máxima da aeronave não foi excedida.")
-        elif len(voo._tripulacao) >= 1:
-            print("Tripulação necessária para voo.")
-        else:
-            print("Não há tripulação na aeronave.")
-    
+            if len(voo._tripulacao) >= 1:
+                print("Tripulação necessária para voo.")
+            else:
+                print("Não há tripulação na aeronave.")
+        else: 
+            print("A capacidade máxima da aeronave foi excedida.")
+        
     def __str__(self):
         return f"Auditor {self.nome} - (ID: {self.get_id()})"
     
