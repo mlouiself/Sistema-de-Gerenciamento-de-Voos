@@ -208,21 +208,22 @@ class CompanhiaAerea:
 # -------------------------------------------------
 class Auditor(IdentificavelMixin, Logavel):
     def __init__(self, nome):
+        IdentificavelMixin.__init__(self)
         self.nome = nome
     
     def logar_entrada(self):
         print(f"O auditor {self.nome} acabou de entrar.")
 
-    def auditar_voo(self,voo = Voo):
+    def auditar_voo(self, voo: Voo):
         if len(voo._passageiros) <= voo.aeronave.capacidade:
             print("A capacidade máxima da aeronave não foi excedida.")
         elif len(voo._tripulacao) >= 1:
             print("Tripulação necessária para voo.")
         else:
-            print("Não há tripulação na aeronave.") 
-        
+            print("Não há tripulação na aeronave.")
+    
     def __str__(self):
-        print(f"Auditor {self.nome} - (ID: {self.get_id()})")
+        return f"Auditor {self.nome} - (ID: {self.get_id()})"
     
 
 # -------------------------------------------------
@@ -305,6 +306,7 @@ if __name__ == "__main__":
     print("\nAUDITORIA")
     auditor.auditar_voo(voo1)
     auditor.auditar_voo(voo4)
+    print(auditor)
     """    
     TODO:
     • Criar 2 companhias, 2 voos cada, passageiros, funcionários e auditor.
